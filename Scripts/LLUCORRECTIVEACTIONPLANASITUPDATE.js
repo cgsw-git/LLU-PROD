@@ -297,10 +297,16 @@ function generateCAPViolationsASITRow(capId,inspId,gsi) {
 //logDebug("    made it to GenerateCAPviolationsASITRow");
 //inspObj = aa.inspection.getInspection(capId,inspId).getOutput();
 //logDebugObject(inspObj);
+
 inspDate = inspObj.getInspectionDate().getMonth() + "/" + inspObj.getInspectionDate().getDayOfMonth() + "/" + inspObj.getInspectionDate().getYear();
 rowVals["Inspection Date"] = new asiTableValObj("Inspection Date",inspDate,"N");
-rowVals["Inspected By"] = new asiTableValObj("Inspected By",aa.env.getValue("StaffFirstName") + " " + aa.env.getValue("StaffLastName"),"N");
-rowVals["Inspector ID"] = new asiTableValObj("Inspector ID",aa.env.getValue("CurrentUserID"),"N");
+
+// add the inspector information
+var thisInspector = inspObj.getInspector(); //returns SysUserModel
+if ( typeof(thisInspector) != "undefined" ) {
+  rowVals["Inspected By"] = new asiTableValObj("Inspected By",thisInspector.getFullName(),"N");
+  rowVals["Inspector ID"] = new asiTableValObj("Inspector ID",thisInspector.getUserID(),"N");
+}
 rowVals["Department"] = new asiTableValObj("Department",capName,"N");
 var vFA = capId.getCustomID();
 rowVals["Department ID #"] = new asiTableValObj("Department ID #",vFA,"N");
