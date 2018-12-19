@@ -14,7 +14,7 @@ if (myResult.getSuccess()){
   addParameter(reportParams,"departmentID",customID);
   addParameter(reportParams, "inspectionDate",inspDate);
   addParameter(reportParams, "inspectionType",inspType);
-  runReportAttach(capId,"5001 Inspection Report",reportParams;
+  runReportAttach(capId,"5001 Inspection Report",reportParams);
 } else {
   logDebug("ERROR: Could not get CapId : " + myResult.getErrorType() + " : " + myResult.getErrorMessage() );
 }
