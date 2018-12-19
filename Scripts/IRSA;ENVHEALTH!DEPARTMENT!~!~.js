@@ -5,5 +5,5 @@ var inspType = inspObj.getInspectionType();
 logDebug("Inspection Date= " + inspDate);
 
 //generate and attach the 5001 Inspection Report to the inspected record
-runReportAttach(capId,"5001 Inspection Report","departmentID",capId.getCustomID(),"inspectionDate",inspDate,"inspectionType",inspType);
+runReportAttach(capId,"5001 Inspection Report","departmentID",inspObj.getCapID.getCustomID(),"inspectionDate",inspDate,"inspectionType",inspType);
 
