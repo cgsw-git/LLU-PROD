@@ -2,7 +2,6 @@ showDebug = true;
 showMessage = true; 
 var inspDate =  inspObj.getInspectionDate().getMonth() + "/" + inspObj.getInspectionDate().getDayOfMonth() + "/" + inspObj.getInspectionDate().getYear();
 var inspType = inspObj.getInspectionType();
-var capId = capId.getCapID();
 logDebug("Inspection Date= " + inspDate);
 
 //generate and attach the 5001 Inspection Report to the inspected record
@@ -14,3 +13,4 @@ if (myResult.getSuccess()){
 } else {
   logDebug("ERROR: Could not get CapId : " + myResult.getErrorType() + " : " + myResult.getErrorMessage() );
 }
+// End generate and attach the 5001 Inspection Report to the inspected record
