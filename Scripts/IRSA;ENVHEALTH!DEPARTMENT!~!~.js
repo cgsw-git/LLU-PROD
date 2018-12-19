@@ -10,7 +10,7 @@ if (myResult.getSuccess()){
   var cap = myResult.getOutput();
   var capId = cap.getCapID();
   var customID = capId.getCustomID();
-  runReportAttach(capId,"5001 Inspection Report","departmentID",customID,"inspectionDate",inspDate,"inspectionType",inspType);
+  runReportAttach(capId,"5001 Inspection Report","inspectionDate",inspDate,"departmentID",customID,"inspectionType",inspType);
 } else {
   logDebug("ERROR: Could not get CapId : " + myResult.getErrorType() + " : " + myResult.getErrorMessage() );
 }
