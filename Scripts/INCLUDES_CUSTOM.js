@@ -1528,7 +1528,7 @@ function runReportAttach(itemCapId,aaReportName)
 
 	var parameters = aa.util.newHashMap(); 
  
-	if(arguments.length > 2 && typeiof(arguments[2]).toString().equals("string")){
+	if(arguments.length > 2 && typeof(arguments[2]).toString().equals("string")){
 		// optional parameters are report parameter pairs
 		// for example: runReportAttach(capId,"ReportName","altid",capId.getCustomID(),"months","12");
 		for (var i = 2; i < arguments.length ; i = i+2)
