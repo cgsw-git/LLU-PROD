@@ -1485,10 +1485,6 @@ function updateAppSpecificTableInfors(tableName, capIDModel, updateRowsMap/** Ma
 	return aa.appSpecificTableScript.updateAppSpecificTableInfors(capIDModel, asitTableModel);
 }
 
-/*-------------------------------------------------------------
-function updateRowsFromASIT end
--------------------------------------------------------------*/
-
  /**
  * Runs a report with any specified parameters and attaches it to the record
  * this was customized because:
@@ -1527,8 +1523,8 @@ function runReportAttach(itemCapId,aaReportName)
 	report.getEDMSEntityIdModel().setAltId(itemCapId.getCustomID());
 
 	var parameters = aa.util.newHashMap(); 
- 
-	if(arguments.length > 2 && typeof(arguments[2]).toString().equals("string")){
+
+	if(arguments.length > 2 && typeof(arguments[2]) == "string"){
 		// optional parameters are report parameter pairs
 		// for example: runReportAttach(capId,"ReportName","altid",capId.getCustomID(),"months","12");
 		for (var i = 2; i < arguments.length ; i = i+2)
@@ -1539,7 +1535,7 @@ function runReportAttach(itemCapId,aaReportName)
 	}
 	else if(arguments.length > 2 && arguments[2].getClass().toString().equals("class java.util.HashMap")){
 		// optional argument is a hashmap so assign it to parameters
-		parameters = arguments[2]
+		parameters = arguments[2];
 	}
   
 	report.setReportParameters(parameters);
@@ -1560,6 +1556,6 @@ function runReportAttach(itemCapId,aaReportName)
 		  return false;
 	}
 } 
- 
+
 
 
