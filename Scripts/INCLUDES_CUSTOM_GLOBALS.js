@@ -4,14 +4,16 @@
 |
 | Usage   : Accela Custom Includes.  Required for all Custom Parameters
 |
-| Notes   : 
+| Notes   : wfComment was added to support a custom getRecordParams4Notification
 |
 /------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------/
 | Custom Parameters
 |	Ifchanges are made, please add notes above.
 /------------------------------------------------------------------------------------------------------*/
-feeEstimate=false;
+var feeEstimate=false;
+var acaURL = "aca.accela.com/LLU";
+var wfComment; 
 if(vEventName.equals("FeeEstimateAfter4ACA")) 
 	feeEstimate=true;
 debugLevel = 2;
