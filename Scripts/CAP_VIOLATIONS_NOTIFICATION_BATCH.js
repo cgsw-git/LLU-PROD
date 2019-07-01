@@ -98,7 +98,7 @@
     logDebug("Success! Records Equals = " + list.length) ;
     for (var i in list) {
       processedDepartments = list.length;
-      if (list[i].getCapStatus() == "CAP Required" && list[i].getCapID().getCustomID() == "FA0000868" ) {
+      if (list[i].getCapStatus() == "CAP Required" ) {
         emailedDepartments = ++emailedDepartments;
         cap = list[i];
         capId = list[i].getCapID();
