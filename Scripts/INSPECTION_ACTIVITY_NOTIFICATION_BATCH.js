@@ -114,7 +114,7 @@
       var altId = cap.getCapModel().getAltID()
     
       // logDebug(inspections.length);
-      if (altId == "FA0000868") {
+      // if (altId == "FA0000868") {
 
         // get the inspections for the department
         myResult = aa.inspection.getInspections(capId);
@@ -152,7 +152,7 @@
             break;
           }
         }
-      }
+      // }
     }
   }else{
     logDebug("no departments")
