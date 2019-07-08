@@ -208,6 +208,7 @@ if (getResult.getSuccess()) {
         // logDebug(inspections.length + " inspections loaded");
         
         // loop through the inspections
+        var applicationStatus = "Active";
         for (var inspCount in inspections)
         {
           var inspModel = inspections[inspCount];
@@ -229,6 +230,7 @@ if (getResult.getSuccess()) {
             // }
           }
         }
+        updateAppStatus(applicationStatus,"Updated by EMSE Script",capId);
       }else{
         // logDebug(r.getErrorMessage());
       }
@@ -278,7 +280,6 @@ if (gsoArray.length > 0) {
   }
   inspTotalTime = inspObj.getTimeTotal();
   //done setting inspection globals
-  
   for (x in gsoArray) {
     gsi = gsoArray[x];
     // generateCAPViolationsASIT(capId,inspId,gsi,cap);
@@ -288,7 +289,7 @@ if (gsoArray.length > 0) {
     if (gsi.gsType.indexOf("Failed items for") < 0) {
       //// logDebug("Evaluating  guidesheet item " + x +" of " + gsoArray.length);
       if (gsi.status == "Out of Compliance" || gsi.status == "Major - Out of Compliance"  && gsi.validInfo) {
-        updateAppStatus("CAP Required","Updated by EMSE Script",capId);
+        applicationStatus = "CAP Required";
         // logDebug("Processing guidesheet item " + x + " with status of " + gsi.status);
         generateCAPViolationsASITRow(capId,inspId,gsi);
         violationsFound++;
@@ -299,6 +300,7 @@ if (gsoArray.length > 0) {
       //// logDebug("Skipping guidesheet item " + x + " as already been processed");
     }
   }
+
 }
 }  
  
