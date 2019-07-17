@@ -118,7 +118,7 @@ try {
   var contactTypesArray = new Array("Primary");
   contactTypesArray[1] = "Frontline Leadership";
   contactTypesArray[2] = "Contact";
-  contactTypesArray[3] = "Executive Leadership";
+  // contactTypesArray[3] = "Executive Leadership";
   // Provide the Notification Template to use
   var notificationTemplate = "LLU FIRE DRILL NOTIFICATION";
   // Get an array of Contact Objects using Master Scripts 3.0
