@@ -129,7 +129,8 @@ function sendOutstandingCAPItemsReport(){
   var agencyReplyEmail = "noreply@accela.com"
   // Provide the contact types to send this notification
   var contactTypesArray = new Array("Primary");
-  contactTypesArray[0] = "Frontline Leadership";
+  contactTypesArray[1] = "Frontline Leadership";
+  contactTypesArray[2] = "Contact";
   // Provide the Notification Template to use
   var notificationTemplate = "LLU CAP EMAIL";
   // Provide the name of the report from Report Manager
