@@ -1,5 +1,5 @@
-// var myCapId = "CA0000013";
-var myUserId = "ADMIN";
+// var myCapId = "CA0000023";
+// var myUserId = "ADMIN";
 
 /* ASA  */  //var eventName = "ApplicationSubmitAfter";
 /* WTUA */  //var eventName = "WorkflowTaskUpdateAfter";  wfTask = "Application Submittal";	  wfStatus = "Admin Approved";  wfDateMMDDYYYY = "01/27/2015";
@@ -37,12 +37,13 @@ try
   for (var c in childTable) {
     cRow = childTable[c];
     pRow = parentTable[c];
-      
+    
     if ( cRow["Corrective Action"].fieldValue != pRow["Corrective Action"].fieldValue
       || cRow["Responsible Party"].fieldValue != pRow["Responsible Party"].fieldValue
-      || aa.util.formatDate(aa.util.parseDate(cRow["Actual/Planned Correction Date"].fieldValue),"MM-dd-yyyy") != aa.util.formatDate(aa.util.parseDate(pRow["Actual/Planned Correction Date"].fieldValue),"MM-dd-yyyy")
+      || cRow["Actual/Planned Correction Date"].fieldValue != pRow["Actual/Planned Correction Date"].fieldValue
       ) {
       logDebug("push fields to update");
+      var updateRowsMap = aa.util.newHashMap(); // Map<rowID, Map<columnName, columnValue>>
       setUpdateColumnValue(updateRowsMap, c, "Corrective Action", cRow["Corrective Action"].fieldValue );
       setUpdateColumnValue(updateRowsMap, c, "Responsible Party", cRow["Responsible Party"].fieldValue );
       setUpdateColumnValue(updateRowsMap, c, "Actual/Planned Correction Date", cRow["Actual/Planned Correction Date"].fieldValue );
@@ -54,6 +55,14 @@ try
         logDebug("add inspector to list");
         inspectorsWithTasks.push(cRow["Inspector ID"].fieldValue);
       }
+      if (!updateRowsMap.empty) {
+        myResult = updateAppSpecificTableInfors(tableName, parentCapId, updateRowsMap);
+        if (myResult.getSuccess()) {
+          logDebug("Success");
+        }else{
+          logDebug(myResult.getErrorMessage());
+        }
+      }
     }else{
       logDebug("no differences");
       if (cRow["CAP Status"].fieldValue == "Incomplete" || cRow["CAP Status"].fieldValue == "Denied") {
@@ -63,15 +72,15 @@ try
     } 
   }
   updateAppStatus(appStatus,"Updated by EMSE Script",parentCapId);
-  logDebug("updateRowsMap is empty: " + updateRowsMap.empty);
-  if (!updateRowsMap.empty) {
-    myResult = updateAppSpecificTableInfors(tableName, parentCapId, updateRowsMap);
-    if (myResult.getSuccess()) {
-      logDebug("Success");
-    }else{
-      logDebug(myResult.getErrorMessage());
-    }
-  }
+  // logDebug("updateRowsMap is empty: " + updateRowsMap.empty);
+  // if (!updateRowsMap.empty) {
+    // myResult = updateAppSpecificTableInfors(tableName, parentCapId, updateRowsMap);
+    // if (myResult.getSuccess()) {
+      // logDebug("Success");
+    // }else{
+      // logDebug(myResult.getErrorMessage());
+    // }
+  // }
 }
 catch (err) {
 	logDebug("A JavaScript Error occured: " + err.message);
