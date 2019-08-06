@@ -1258,13 +1258,14 @@ function getRecordParams4Notification(params) {
 	return params;
 }
 
-function getACARecordParam4Notification(params,acaUrl) {
+/* function getACARecordParam4Notification(params,acaUrl) {
 	// pass in a hashtable and it will add the additional parameters to the table
 
 	addParameter(params, "$$acaRecordUrl$$", getACARecordURL(acaUrl));
 	
 	return params;	
 }
+*/
 
 function getACADeepLinkParam4Notification(params,acaUrl,pAppType,pAppTypeAlias,module) {
 	// pass in a hashtable and it will add the additional parameters to the table
@@ -1369,7 +1370,7 @@ function getACADocumentDownloadUrl(acaUrl,documentModel) {
 }
 
 
-function getACARecordURL(acaUrl) {
+/* function getACARecordURL(acaUrl) {
 	
 	var acaRecordUrl = "";
 	var id1 = capId.ID1;
@@ -1383,6 +1384,7 @@ function getACARecordURL(acaUrl) {
 
    	return acaRecordUrl;
 }
+*/
 
 function getDeepLinkUrl(acaUrl, appType, module) {
 	var acaDeepLinkUrl = "";
@@ -1556,6 +1558,83 @@ function runReportAttach(itemCapId,aaReportName)
 		  return false;
 	}
 } 
+
+function logDebugObject(myObject) {
+/*
+usage - logDebugObject(object)
+
+author - Michael Zachry
+created - 10/10/2018
+
+updates
+10/11/2018 - initial version
+
+*/
+  //list the methods
+  try {
+    logDebug("object is is a " + myObject.getClass());
+    logDebug("object has the following methods:");
+    for (x in myObject) {
+      if (typeof(myObject[x]) == "function" ) {
+        logDebug("  " + x);
+      }
+    }
+  } catch (err) {
+    logDebug("A JavaScript Error occured: " + err.message);
+  }
+  try {
+    //list the properties and values    
+    logDebug("object has the following properties and values:");
+    for (x in myObject) {
+      if (typeof(myObject[x]) != "function" ) {
+        logDebug("  " + x + " = " + myObject[x]);
+      }
+    }
+  } catch (err) {
+    logDebug("A JavaScript Error occured: " + err.message);
+  }
+}
+
+/*
+* ADDS ASIT ROW TO EXISTING TABLE 
+    columnArray = [
+        { colName: 'Abatement #', colValue: capIDString },
+        { colName: 'Type', colValue: 'Snow' }
+    ]
+*/
+function addAsiTableRow(tableName, columnArray, options) {
+    var settings = {
+        capId: capId,
+    };
+    for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
+  
+    var asitFieldArray = [],
+        colsMapping = aa.util.newHashMap();;
+
+    for(var idx in columnArray) {
+        colsMapping.put(columnArray[idx].colName, columnArray[idx].colValue);
+    }
+    logDebug('addAsiTableRow(): inserting ASIT Row');
+    asitFieldArray.push(colsMapping);
+    return addAppSpecificTableInfors();
+
+
+    function addAppSpecificTableInfors() {
+        var asitTableScriptModel = aa.appSpecificTableScript.createTableScriptModel();
+        var asitTableModel = asitTableScriptModel.getTabelModel();
+        var rowList = asitTableModel.getRows();
+        asitTableModel.setSubGroup(tableName);
+        for (var i = 0; i < asitFieldArray.length; i++) {
+            var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
+            var rowModel = rowScriptModel.getRow();
+            rowModel.setFields(asitFieldArray[i]);
+            rowList.add(rowModel);
+        }
+        logDebug('addAppSpecificTableInfors(): inserting ASIT Row');
+        return aa.appSpecificTableScript.addAppSpecificTableInfors(settings.capId, asitTableModel);
+    }
+
+}
 
 
 
