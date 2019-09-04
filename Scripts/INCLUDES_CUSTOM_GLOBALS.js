@@ -13,7 +13,7 @@
 /------------------------------------------------------------------------------------------------------*/
 var feeEstimate=false;
 var acaURL = "aca.accela.com/LLU";
-var agencyReplyEmail = "LLU.EHS@accela.com"
+var agencyReplyEmail = "LLU.EHS@accela.com";
 var wfComment; 
 if(vEventName.equals("FeeEstimateAfter4ACA")) 
 	feeEstimate=true;
