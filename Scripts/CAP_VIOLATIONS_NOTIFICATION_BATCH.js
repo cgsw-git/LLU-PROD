@@ -17,8 +17,8 @@
 	message = "";
 	br = "<br>";
 	debug = "";
-  showDebug = true;
-  logDebug = true;
+	showDebug = true;
+
 	/*------------------------------------------------------------------------------------------------------/
 	| BEGIN Includes
 	/------------------------------------------------------------------------------------------------------*/
@@ -63,7 +63,6 @@
 	| Start: BATCH PARAMETERS
 	|
 	/------------------------------------------------------------------------------------------------------*/
-  
 
 	/*----------------------------------------------------------------------------------------------------/
 	|
@@ -79,7 +78,7 @@
 	|
 	/-----------------------------------------------------------------------------------------------------*/
 
-	var systemUserObj = aa.person.getUser("ADMIN").getOutput();
+  var systemUserObj = aa.person.getUser("ADMIN").getOutput();
   var currentUserID = "ADMIN";
   var startDate = new Date();
   var startTime = startDate.getTime();			// Start timer
@@ -87,7 +86,7 @@
   var processedDepartments = 0
   var emailedDepartments = 0
   var emailsSent = 0
-  showDebug = true;
+  // showDebug = true;
   var wfComment; // to accomodate customization that was done to getRecordParams4Notification() in INCLUDES_CUSTOM
   logDebug("Start of Job");
   
@@ -95,7 +94,7 @@
   var getResult = aa.cap.getByAppType("EnvHealth","Department", null, null);
   if (getResult.getSuccess()) {
     var list = getResult.getOutput();
-    logDebug("Success! Records Equals = " + list.length) ;
+    // logDebug("Success! Records Equals = " + list.length) ;
     for (var i in list) {
       processedDepartments = list.length;
       if (list[i].getCapStatus() == "CAP Required" ) {
@@ -103,8 +102,8 @@
         cap = list[i];
         capId = list[i].getCapID();
         capIDString = capId.getCustomID();
-        logDebug("sending report for " + capId.getCustomID());
-        sendOutstandingCAPItemsReport();
+		sendOutstandingCAPItemsReport();
+		logDebug("sending report for " + capId.getCustomID());
       } else {
         skippedDepartments = ++skippedDepartments;
       }
@@ -192,7 +191,7 @@ function sendOutstandingCAPItemsReport(){
 	var itemBalanceDue;
 	
   var itemCapDetailObjResult = aa.cap.getCapDetail(itemCapId);	
-  logDebug("itemCapDetailObjResult = " + itemCapDetailObjResult.getSuccess() );
+  // logDebug("itemCapDetailObjResult = " + itemCapDetailObjResult.getSuccess() );
  	if (itemCapDetailObjResult.getSuccess())
 	{
 		itemCapDetail = itemCapDetailObjResult.getOutput();
