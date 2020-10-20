@@ -6,6 +6,7 @@ This event script:
 1) sets the Department parent record to "CAP Required" when a deficiency is found
 2) adds a row to the Corrective Action Plan ASIT on the parent Department record for each deficiency on the Departmental Fire Drill record type amendment.
 
+10/16/2020 - Mike Zachry - Restored logging dficiencies to the CAP ASIT per Erik Navarette.
 9/3/2020 - Mike Zachry - Disable logging deficiencies to the CAP ASIT per Erik Navaette see Trello card https://trello.com/c/ff2sRp5d
 
 */
@@ -38,7 +39,6 @@ try {
   copyAddresses(parentCapId,capId);
   editAppName(aa.cap.getCap(parentCapId).getOutput().specialText, capId)
 
-/*  Disable creating CAP entries per Erik Navaette. See Trello card https://trello.com/c/ff2sRp5d
   // read through the ASI fields looking for value of "Out of Compliance" 
   for (var x in AInfo) {
     
@@ -122,7 +122,6 @@ try {
   if (outOfCompliance) {
     updateAppStatus("CAP Required","Updated by EMSE Script",parentCapId);
   }
-*/  
   
   // send email notification to contacts
   // Provide the ACA URl - This should be set in INCLUDES_CUSTOM_GLOBALS
@@ -152,7 +151,7 @@ try {
       addParameter(eParams, "$$acaUrl$$", acaURL);
       // addParameter(eParams, "$$recordTypeAlias$$", "Department");
       // myGetRecordParams4Notification(eParams,capId);
-      getRecordParams4Notification(eParams);
+      getRecordParams4Notification(eParams, parentCapId);
       // myGetACARecordParam4Notification(eParams,acaURL,capId);
       getACARecordParam4Notification(eParams,acaURL);
       // logDebug(capId);
