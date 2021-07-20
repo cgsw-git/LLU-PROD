@@ -18,12 +18,13 @@ var wfComment;
 if(vEventName.equals("FeeEstimateAfter4ACA")) 
 	feeEstimate=true;
 debugLevel = 2;
+/*
 if (currentUserID == "ADMIN") {
    showDebug = true;
    showMessage = true;
    debugLevel = 3;
 }
-
+*/
 
 /*------------------------------------------------------------------------------------------------------/
 | END Custom Parameters
