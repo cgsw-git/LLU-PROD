@@ -108,7 +108,7 @@
       if (list[i].getCapStatus() == "CAP Required" ) {
 		  // check CAP entries and update the record status appropriately
 		capId = list[i].getCapID();
-		if (capId.getCustomID() == "FA0000868") {
+		if (capId.getCustomID() != "FA0000868") {
 			myTable = loadASITable("CAP",capId)
 			// logDebug("capId = " + capId);
 			for(r in myTable) {
@@ -119,8 +119,7 @@
 					emailedDepartments = ++emailedDepartments;
 					cap = list[i];
 					capIDString = capId.getCustomID();
-					sendOutstandingCAPItemsReport();
-					logDebug('Processed facility: '+ capIDString)
+					// sendOutstandingCAPItemsReport();
 					break;
 				}else{
 					// set record status to Active
@@ -130,6 +129,8 @@
 					// statusCorrected = ++statusCorrected;
 				}
 			}
+			logDebug('Processed facility: '+ capId.getCustomID())
+
 		}
 	  } else {
 		skippedDepartments = ++skippedDepartments;
