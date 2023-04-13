@@ -27,7 +27,7 @@
 
 	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 	eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-	eval(getScriptText("INCLUDES_BATCH"));
+	// eval(getScriptText("INCLUDES_BATCH"));
 	eval(getScriptText("INCLUDES_CUSTOM"));
 
 
@@ -94,7 +94,6 @@
   var emailedDepartments = 0;
   var emailsSent = 0;
   var statusCorrected = 0;
-  showDebug = true;
   daysDelinquent = "30";
   var wfComment; // to accomodate customization that was done to getRecordParams4Notification() in INCLUDES_CUSTOM
   logDebug("Start of Job");
@@ -109,7 +108,7 @@
       if (list[i].getCapStatus() == "CAP Required" ) {
 		  // check CAP entries and update the record status appropriately
 		capId = list[i].getCapID();
-		if (capId.getCustomID() != "FA0000868") {
+		if (capId.getCustomID() == "FA0000868") {
 			myTable = loadASITable("CAP",capId)
 			// logDebug("capId = " + capId);
 			for(r in myTable) {
@@ -145,12 +144,16 @@
      logDebug("Error getting records");
   } //if (getResult.getSuccess())
 
-  logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds");
+  // logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds");
   logDebug("Departments processed:" + processedDepartments);
   logDebug("Departments skipped: " + skippedDepartments);
   logDebug("Notified departments: " + emailedDepartments);
   logDebug("Emails sent " + emailsSent);
   logDebug("Department Status values corrected " + statusCorrected);
+  
+  aa.env.setValue("ScriptReturnCode", "0");
+  aa.env.setValue("ScriptReturnMessage", debug);
+
 
 	/*------------------------------------------------------------------------------------------------------/
 	| <===========END=Main=Loop================>
