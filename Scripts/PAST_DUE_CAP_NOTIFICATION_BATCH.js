@@ -114,14 +114,16 @@
 			for(r in myTable) {
 				currentRow = myTable[r];
 				if (currentRow["First Response Date"] == "" 
-					&& currentRow["Inspection date"] != "" 
-					&& ((startDate - convertDate(aa.util.parseDate(currentRow["Inspection Date"])))/DAY) > daysDelinquent) {
+				&& currentRow["CAP Status"] != "Approved"
+				&& currentRow["CAP Status"] != "Pending"
+				&& currentRow["Inspection date"] != "" 
+				&& ((startDate - convertDate(aa.util.parseDate(currentRow["Inspection Date"])))/DAY) > daysDelinquent) {
 					emailedDepartments = ++emailedDepartments;
 					cap = list[i];
 					capIDString = capId.getCustomID();
 					// sendOutstandingCAPItemsReport();
 					break;
-				}else{
+				// }else{
 					// set record status to Active
 					// logDebug("updating status for " + capId.getCustomID());
 					// appStatus = "Active"
@@ -137,9 +139,9 @@
 		capId = list[i].getCapID();
 		logDebug('Skipped facility: ' + capId.getCustomID());
 	  }
-	// if(skippedDepartments > 10 && emailedDepartments > 10) {
-		// break;
-	// }
+	 // if(skippedDepartments > 5 && emailedDepartments > 5) {
+		 // break;
+	 // }
     } //for (var i in list)
   }else{
      logDebug("Error getting records");
