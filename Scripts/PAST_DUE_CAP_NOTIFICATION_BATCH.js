@@ -121,7 +121,7 @@
 					emailedDepartments = ++emailedDepartments;
 					cap = list[i];
 					capIDString = capId.getCustomID();
-					// sendOutstandingCAPItemsReport();
+					sendOutstandingCAPItemsReport();
 					break;
 				// }else{
 					// set record status to Active
